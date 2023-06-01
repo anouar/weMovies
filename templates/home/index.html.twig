@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block body %}
+
+<div class="container mt-lg-5">
+    <div class="row mt-lg-5">
+        <div class="col col-12 videoWrapper mb-5">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ movieVideo.key }}"></iframe>
+        </div>
+    <div class="col col-3">
+        {{ form_start(form) }}
+        <h2>{{ form_label(form.genre) }}</h2>
+        <div class="clearfix"></div>
+        {{ form_widget(form.genre) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="col col-9" id="movies_list">
+    </div>
+    </div>
+<div id="loading"></div>
+<div class="spinner-border text-primary" id="spinner" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+   {% include 'modal/modal.html.twig' %}
+        {% endblock %}
+        {% block javascripts %}
+        {{ parent() }}
+<script>
+    const url_listing  = "{{ path('app_listing_movie')|escape('js') }}";
+     const url_video  = "{{ path('app_detail_video')|escape('js') }}";
+</script>
+{% endblock %}
